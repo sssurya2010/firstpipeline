@@ -35,7 +35,7 @@ for country, (lat, lon) in capitals.items():
 timestamp = dt.now().strftime("%Y-%m-%d_%H-%M")
 print(timestamp)
 df = pd.DataFrame(data)
-excel_file = f"country_temperatures_{timestamp}.xlsx"
+excel_file = f"country_temp_{timestamp}.xlsx"
 df.to_excel(excel_file, index=False)
 
 # Step 5: Upload to GCS
