@@ -7,7 +7,7 @@ def run_script_from_gcs():
     subprocess.run([
         "gsutil", "cp", "gs://firstworkflow/code/weather.py", "/tmp/weather.py"
     ], check=True)
-    subprocess.run(["python3", "/tmp/your_script.py"], check=True)
+    subprocess.run(["python3", "/tmp/weather.py"], check=True)
 
 with DAG(
     dag_id='run_python_from_gcs_python_operator',
