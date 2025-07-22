@@ -44,11 +44,11 @@ def upload_to_gcs(bucket_name, destination_blob_name, source_file_name):
     bucket = client.bucket(bucket_name)
     blob = bucket.blob(destination_blob_name)
     blob.upload_from_filename(source_file_name)
-    print(f"Uploaded {source_file_name} to gs://{bucket_name}/{destination_blob_name}")
+    print(f"Uploaded {source_file_name} to gs://{bucket_name}/output/{destination_blob_name}")
 
 # 🔁 Replace with your GCS bucket and file path
 upload_to_gcs(
-    bucket_name='firstworkflow/code',
+    bucket_name='firstworkflow',
     destination_blob_name='weather_data/{excel_file}'.format(excel_file=excel_file),
     source_file_name=excel_file
 )
