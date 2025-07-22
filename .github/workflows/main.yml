@@ -21,8 +21,5 @@ jobs:
     - name: Set up gcloud CLI
       uses: google-github-actions/setup-gcloud@v1
 
-    - name: Zip code
-      run: zip -r release.zip .
-
     - name: Upload to GCS
-      run: gsutil cp release.zip gs://test1-surya-bucket/path/to/release.zip
+      run: gsutil cp -r ./ gs://test1-surya-bucket/path/to/release.zip
