@@ -22,4 +22,4 @@ jobs:
       uses: google-github-actions/setup-gcloud@v1
 
     - name: Upload to GCS
-      run: gsutil -m cp src/*.py gs://test1-surya-bucket/
+      run: gsutil -m cp *.py gs://test1-surya-bucket/
