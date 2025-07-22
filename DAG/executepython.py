@@ -5,7 +5,7 @@ import subprocess
 
 def run_script_from_gcs():
     subprocess.run([
-        "gsutil", "cp", "gs://your-bucket-name/scripts/your_script.py", "/tmp/your_script.py"
+        "gsutil", "cp", "gs://firstworkflow/code/weather.py", "/tmp/weather.py"
     ], check=True)
     subprocess.run(["python3", "/tmp/your_script.py"], check=True)
 
