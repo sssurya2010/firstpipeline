@@ -1,24 +1,27 @@
 from airflow import DAG
-from airflow.operators.python import PythonOperator
+from airflow.operators.bash import BashOperator
 from datetime import datetime
-import subprocess
 
-def run_script_from_gcs():
-    subprocess.run([
-        "gsutil", "cp", "gs://firstworkflow/code/weather.py", "/tmp/weather.py"
-    ], check=True)
-    subprocess.run(["python3", "/tmp/weather.py"], check=True)
+default_args = {
+    'owner': 'airflow',
+    'start_date': datetime(2025, 7, 21),
+    'retries': 1,
+}
 
 with DAG(
-    dag_id='run_python_from_gcs_python_operator',
-    start_date=datetime(2025, 7, 21),
+    dag_id='run_python_from_gcs',
+    default_args=default_args,
     schedule_interval=None,
     catchup=False,
+    tags=['example'],
 ) as dag:
 
-    run_task = PythonOperator(
-        task_id='run_python',
-        python_callable=run_script_from_gcs,
+    download_and_run_script = BashOperator(
+        task_id='download_and_run_script',
+        bash_command="""
+        gsutil cp gs://firstworkflow/code/weather.py
+        python3 /tmp/weather.py
+        """
     )
 
-    run_task
+    download_and_run_script
