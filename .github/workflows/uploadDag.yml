@@ -1,0 +1,27 @@
+name: Upload Specific Files to GCS
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Authenticate to Google Cloud
+      uses: google-github-actions/auth@v2
+      with:
+        credentials_json: '${{ secrets.GCP_KEY }}'
+
+    - name: Set up gcloud CLI
+      uses: google-github-actions/setup-gcloud@v1
+
+    - name: Upload selected files to GCS
+      run: |
+        gsutil -m cp -r DAG/* gs://us-central1-firstflow2-fd67e9f6-bucket/dags
+
