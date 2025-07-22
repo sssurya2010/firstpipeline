@@ -1,4 +1,4 @@
-name: Upload Specific Files to GCS
+name: Upload DAG Files to Composer
 
 on:
   push:
