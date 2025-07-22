@@ -19,7 +19,7 @@ with DAG(
     download_and_run_script = BashOperator(
         task_id='download_and_run_script',
         bash_command="""
-        gsutil cp gs://firstworkflow/code/weather.py
+        gsutil cp gs://firstworkflow/code/weather.py /tmp/weather.py
         python3 /tmp/weather.py
         """
     )
