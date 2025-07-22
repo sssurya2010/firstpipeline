@@ -48,7 +48,7 @@ def upload_to_gcs(bucket_name, destination_blob_name, source_file_name):
 
 # 🔁 Replace with your GCS bucket and file path
 upload_to_gcs(
-    bucket_name='test1-surya-bucket',
+    bucket_name='firstworkflow/code',
     destination_blob_name='weather_data/{excel_file}'.format(excel_file=excel_file),
     source_file_name=excel_file
 )
