@@ -17,7 +17,7 @@ with DAG(
                 "query": None,
                 "queryParameters": [],
                 "useLegacySql": False,
-                "sourceUris": ["gs://your-bucket-name/path/to/your_script.sql"]
+                "sourceUris": ["gs://firstworkflow/ddl/Temperature_DDL.sql"]
             }
         },
         location="US",  # Replace with your region if needed
