@@ -1,4 +1,4 @@
-name: Deploy to GCS
+name: Deploy DDL to GCS
 
 on:
   push:
@@ -22,4 +22,4 @@ jobs:
       uses: google-github-actions/setup-gcloud@v1
 
     - name: Upload to GCS
-      run: gsutil -m cp *.sql gs://firstworkflow/ddl
+      run: gsutil -m cp DDL/*.sql gs://firstworkflow/ddl
