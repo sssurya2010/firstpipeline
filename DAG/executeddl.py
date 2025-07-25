@@ -17,7 +17,7 @@ with DAG(
         task_id='execute_bqsql_from_gcs_task',
         configuration={
             "query": {
-                "queryUri": "gs://firstworkflow/ddl/Temperature_DDL.sql",
+                "queryUri": "gs://firstworkflow/ddl/Temprature_DDL.sql",
                 "useLegacySql": False,
                 "writeDisposition": "WRITE_TRUNCATE",
             }
