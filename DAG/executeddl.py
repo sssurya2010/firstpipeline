@@ -21,7 +21,9 @@ with DAG(
             }
         },
         location="US",  # Replace with your region if needed
-        gcp_conn_id="google_cloud_storage_default",
+        gcp_conn_id="google_cloud_default",
     )
+
+    
 
     
