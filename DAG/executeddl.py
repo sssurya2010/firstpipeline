@@ -17,7 +17,7 @@ with DAG(
         task_id='run_sql_file',
         configuration={
             "query": {
-                "query": None,
+                "query": "",
                 "queryParameters": [],
                 "useLegacySql": False,
                 "sourceUris": ["gs://firstworkflow/ddl/Temperature_DDL.sql"]
