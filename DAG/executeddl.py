@@ -12,19 +12,17 @@ with DAG(
     catchup=False,
     tags=['bigquery'],
 ) as dag:
-
-    run_sql_from_gcs = BigQueryInsertJobOperatorNoTemplate(
-        task_id='run_sql_file',
+    
+    execute_gcs_bqsql = BigQueryInsertJobOperator(
+        task_id='execute_bqsql_from_gcs_task',
         configuration={
             "query": {
-                "query": "",
-                "queryParameters": [],
+                "queryUri": "gs://firstworkflow/ddl/Temperature_DDL.sql",
                 "useLegacySql": False,
-                "sourceUris": ["gs://firstworkflow/ddl/Temperature_DDL.sql"]
+                "writeDisposition": "WRITE_TRUNCATE",
             }
         },
-        location="US",
-        gcp_conn_id="google_cloud_default",
+        gcp_conn_id='google_cloud_default',  # Or your specific GCP connection ID
     )
 
-    run_sql_from_gcs
+   
