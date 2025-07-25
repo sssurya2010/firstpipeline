@@ -24,4 +24,4 @@ with DAG(
         gcp_conn_id="google_cloud_default",
     )
 
-    run
+    
