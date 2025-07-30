@@ -1,5 +1,6 @@
 from airflow import DAG
 from airflow.providers.google.cloud.operators.bigquery import BigQueryInsertJobOperator
+from airflow.providers.google.cloud.hooks.gcs import GCSHook
 from datetime import datetime
 
 # Disable templating to avoid Jinja trying to load gs:// as local template
@@ -14,18 +15,28 @@ with DAG(
     tags=['bigquery'],
 ) as dag:
 
-      execute_gcs_bqsql = BigQueryInsertJobOperatorNoTemplate(
+    # ...existing code...
+
+
+    def read_sql_from_gcs(bucket_name, object_name, gcp_conn_id='google_cloud_default'):
+        hook = GCSHook(gcp_conn_id=gcp_conn_id)
+        return hook.download(bucket_name, object_name).decode('utf-8')
+
+    bucket = 'firstworkflow'
+    object_name = 'ddl/Temprature_DDL.sql'
+    ddl_query = read_sql_from_gcs(bucket, object_name)
+
+    execute_gcs_bqsql = BigQueryInsertJobOperatorNoTemplate(
         task_id='execute_bqsql_from_gcs_task',
         configuration={
             "query": {
-                "query": "SELECT 1",  # Dummy query to satisfy required parameter
-                "sourceUris": ["gs://firstworkflow/ddl/Temprature_DDL.sql"],
-                "useLegacySql": False,
-                "writeDisposition": "WRITE_TRUNCATE"
+                "query": ddl_query,
+                "useLegacySql": False
             }
         },
         gcp_conn_id='google_cloud_default',
         location='US'
     )
+# ...existing code...
 
 execute_gcs_bqsql
