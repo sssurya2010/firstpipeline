@@ -14,18 +14,18 @@ with DAG(
     tags=['bigquery'],
 ) as dag:
 
-    execute_gcs_bqsql = BigQueryInsertJobOperatorNoTemplate(
+      execute_gcs_bqsql = BigQueryInsertJobOperatorNoTemplate(
         task_id='execute_bqsql_from_gcs_task',
         configuration={
             "query": {
-                "query": "",  # Required dummy string to avoid "missing query" error
-                "sourceUris": ["gs://firstworkflow/ddl/Temprature_DDL.sql"],  # ✅ Correct key
+                "query": "SELECT 1",  # Dummy query to satisfy required parameter
+                "sourceUris": ["gs://firstworkflow/ddl/Temprature_DDL.sql"],
                 "useLegacySql": False,
                 "writeDisposition": "WRITE_TRUNCATE"
             }
         },
         gcp_conn_id='google_cloud_default',
-        location='US'  # Add this if your BigQuery datasets are in the US
+        location='US'
     )
 
-    execute_gcs_bqsql
+execute_gcs_bqsql
