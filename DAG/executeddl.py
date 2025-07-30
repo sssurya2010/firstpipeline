@@ -40,7 +40,7 @@ with DAG(
                 "useLegacySql": False
             }
         },
-        gcp_conn_id='google_gcs_project_conn',
+        gcp_conn_id='google_cloud_default',
         location='US'
     )
 # ...existing code...
