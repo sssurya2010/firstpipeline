@@ -7,8 +7,14 @@ from datetime import datetime
 class BigQueryInsertJobOperatorNoTemplate(BigQueryInsertJobOperator):
     template_fields = []
 
+default_args = {
+    'retries': 0
+}
+
+
 with DAG(
     dag_id='run_bq_sql_from_gcs_fixed',
+    default_args=default_args,
     start_date=datetime(2023, 1, 1),
     schedule_interval=None,
     catchup=False,
