@@ -1,4 +1,4 @@
-name: Deploy to GCS
+name: Deploy python code to GCS
 
 on:
   push:
