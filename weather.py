@@ -35,8 +35,8 @@ for country, (lat, lon) in capitals.items():
 timestamp = dt.now().strftime("%Y-%m-%d_%H-%M")
 print(timestamp)
 df = pd.DataFrame(data)
-excel_file = f"country_wise_temp_{timestamp}.xlsx"
-df.to_excel(excel_file, index=False)
+csv_file = f"country_wise_temp_{timestamp}.csv"
+df.to_csv(csv_file, index=False)
 
 # Step 5: Upload to GCS
 def upload_to_gcs(bucket_name, destination_blob_name, source_file_name):
@@ -49,6 +49,6 @@ def upload_to_gcs(bucket_name, destination_blob_name, source_file_name):
 # 🔁 Replace with your GCS bucket and file path
 upload_to_gcs(
     bucket_name='firstworkflow',
-    destination_blob_name='output/{excel_file}'.format(excel_file=excel_file),
-    source_file_name=excel_file
+    destination_blob_name=f'output/{csv_file}',
+    source_file_name=csv_file
 )
