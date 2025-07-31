@@ -3,6 +3,7 @@ from airflow.providers.google.cloud.transfers.gcs_to_bigquery import GCSToBigQue
 from airflow.providers.google.cloud.hooks.gcs import GCSHook
 from airflow.operators.python import PythonOperator
 from airflow.utils.dates import days_ago
+from datetime import datetime
 
 default_args = {
     'owner': 'airflow',
@@ -14,7 +15,7 @@ def move_to_processed_func(execution_date, **context):
     gcs_hook = GCSHook()
     src_bucket = 'firstworkflow'
     src_object = 'output/country_wise_temp.csv'
-    dest_object = f"output/processed/country_wise_temp_{execution_date.strftime('%Y%m%d_%H%M%S')}.csv"
+    dest_object = f"output/processed/country_wise_temp_{datetime.now()}.csv"
     gcs_hook.copy(src_bucket, src_object, src_bucket, dest_object)
     gcs_hook.delete(src_bucket, src_object)
 
