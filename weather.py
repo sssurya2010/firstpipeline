@@ -25,17 +25,17 @@ def get_temperature(lat, lon):
         return response.json()['current_weather']['temperature']
     return None
 
-# Step 3: Store in list of dicts
+# Step 3: Store in list of dicts 
 data = []
 for country, (lat, lon) in capitals.items():
     temp = get_temperature(lat, lon)
     data.append({"Country": country, "Latitude": lat, "Longitude": lon, "Temperature (°C)": temp})
 
-# Step 4: Create Excel file
+# Step 4: Create CSV file
 timestamp = dt.now().strftime("%Y-%m-%d_%H-%M")
 print(timestamp)
 df = pd.DataFrame(data)
-csv_file = f"country_wise_temp_{timestamp}.csv"
+csv_file = f"country_wise_temp.csv"
 df.to_csv(csv_file, index=False)
 
 # Step 5: Upload to GCS
