@@ -29,7 +29,7 @@ def get_temperature(lat, lon):
 data = []
 for country, (lat, lon) in capitals.items():
     temp = get_temperature(lat, lon)
-    data.append({"Country": country, "Latitude": lat, "Longitude": lon, "Temperature (°C)": temp})
+    data.append({"Country": country, "Latitude": lat, "Longitude": lon, "Temperature": temp})
 
 # Step 4: Create CSV file
 timestamp = dt.now().strftime("%Y-%m-%d_%H-%M")
